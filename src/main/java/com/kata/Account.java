@@ -1,8 +1,14 @@
 package com.kata;
 
 public class Account {
+    private final Transactions transactions;
+
+    public Account(Transactions transactions) {
+        this.transactions = transactions;
+    }
+
     public void deposit(int amount) {
-        throw new UnsupportedOperationException();
+        transactions.addDeposit(amount);
     }
 
     public void withdraw(int amount) {
