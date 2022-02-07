@@ -3,7 +3,8 @@ package com.kata;
 import java.util.ArrayList;
 
 public class Transactions {
-    private ArrayList<Transaction> transactions;
+    private ArrayList<Transaction> transactions = new ArrayList<>();
+
     public void addDeposit(int amount) {
         this.transactions.add(new Transaction(amount));
 
@@ -14,6 +15,6 @@ public class Transactions {
     }
 
     public ArrayList<Transaction> getAll() {
-        throw new UnsupportedOperationException();
+        return this.transactions;
     }
 }
