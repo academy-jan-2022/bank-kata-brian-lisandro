@@ -13,6 +13,6 @@ public class TransactionsShould {
         transactions.addDeposit(1000);
         var result = transactions.getAll();
         var expected = new Transaction(1000);
-        assertEquals(expected.getAmount(), result[0].getAmount());
+        assertEquals(expected.getAmount(), result.get(0).getAmount());
     }
 }

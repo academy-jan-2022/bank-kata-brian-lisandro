@@ -1,15 +1,19 @@
 package com.kata;
 
+import java.util.ArrayList;
+
 public class Transactions {
-    public void addDeposit(int i) {
-        throw new UnsupportedOperationException();
+    private ArrayList<Transaction> transactions;
+    public void addDeposit(int amount) {
+        this.transactions.add(new Transaction(amount));
+
     }
 
     public void addWithdrawal(int i) {
         throw new UnsupportedOperationException();
     }
 
-    public Transaction[] getAll() {
+    public ArrayList<Transaction> getAll() {
         throw new UnsupportedOperationException();
     }
 }
