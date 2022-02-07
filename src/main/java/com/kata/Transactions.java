@@ -7,11 +7,10 @@ public class Transactions {
 
     public void addDeposit(int amount) {
         this.transactions.add(new Transaction(amount));
-
     }
 
-    public void addWithdrawal(int i) {
-        throw new UnsupportedOperationException();
+    public void addWithdrawal(int amount) {
+        this.transactions.add(new Transaction(-amount));
     }
 
     public ArrayList<Transaction> getAll() {

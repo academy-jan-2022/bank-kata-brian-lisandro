@@ -15,4 +15,13 @@ public class TransactionsShould {
         var expected = new Transaction(1000);
         assertEquals(expected.getAmount(), result.get(0).getAmount());
     }
+
+    @Test void
+    take_a_withdrawal_request() {
+        var transactions = new Transactions();
+        transactions.addWithdrawal(100);
+        var result = transactions.getAll();
+        var expected = new Transaction(-100);
+        assertEquals(expected.getAmount(), result.get(0).getAmount());
+    }
 }
