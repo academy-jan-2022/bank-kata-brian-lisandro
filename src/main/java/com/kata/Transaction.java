@@ -2,9 +2,16 @@ package com.kata;
 
 public class Transaction {
     private final int amount;
+    private final String date;
 
     public Transaction(int amount) {
         this.amount = amount;
+        this.date = "10/01/2020";
+    }
+
+    public Transaction(int amount, String date) {
+        this.amount = amount;
+        this.date =  date;
     }
 
     public int getAmount() {
@@ -12,6 +19,6 @@ public class Transaction {
     }
 
     public String getDate() {
-        return "10/01/2020";
+        return this.date;
     }
 }

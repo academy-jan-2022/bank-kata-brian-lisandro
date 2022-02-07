@@ -23,13 +23,18 @@ public class Account {
             var list = transactions.getAll();
             var runningBalance = 0;
 
-            for (Transaction transaction:list) {
-                runningBalance += transaction.getAmount();
-                output.append(
-                    transaction.getDate() + " || " +
-                        transaction.getAmount() + " || " +
-                        runningBalance + " || "
+        for (int i = 0; i < list.size(); i++) {
+            Transaction transaction = list.get(i);
+            runningBalance += transaction.getAmount();
+            output.append(
+                transaction.getDate() + " || " +
+                    transaction.getAmount() + " || " +
+                    runningBalance
             );
+
+            if (i < list.size()) {
+                output.append("\n");
+            }
         }
 
         statementPrinter.print(output.toString());
