@@ -11,7 +11,8 @@ public class AcceptanceTest {
     @Test void
     acceptance_test(){
         var transactions = new Transactions();
-        var account = new Account(transactions);
+        var statementPrinter = new StatementPrinter();
+        var account = new Account(transactions, statementPrinter);
 
         account.deposit(1000);
         account.deposit(2000);

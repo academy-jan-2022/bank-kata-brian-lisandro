@@ -10,4 +10,12 @@ public class Transaction {
     public int getAmount() {
         return this.amount;
     }
+
+    public Object getBalance() {
+        throw new UnsupportedOperationException();
+    }
+
+    public String getDate() {
+        throw new UnsupportedOperationException();
+    }
 }
