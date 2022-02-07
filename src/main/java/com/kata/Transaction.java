@@ -11,11 +11,7 @@ public class Transaction {
         return this.amount;
     }
 
-    public Object getBalance() {
-        throw new UnsupportedOperationException();
-    }
-
     public String getDate() {
-        throw new UnsupportedOperationException();
+        return "10/01/2020";
     }
 }

@@ -11,4 +11,11 @@ public class TransactionShould {
         var result = transaction.getAmount();
         assertEquals(100,  result);
     }
+
+    @Test void
+    get_date(){
+        var transaction = new Transaction(100);
+        var result = transaction.getDate();
+        assertEquals("10/01/2020",  result);
+    }
 }

@@ -2,7 +2,7 @@ package com.kata;
 
 public class Account {
     private final Transactions transactions;
-    private final StatementPrinter statementPrinter;
+    private StatementPrinter statementPrinter;
 
     public Account(Transactions transactions, StatementPrinter statementPrinter) {
         this.transactions = transactions;
@@ -21,15 +21,17 @@ public class Account {
         var output = new StringBuilder();
         output.append("Date       || Amount || Balance\n");
             var list = transactions.getAll();
+            var runningBalance = 0;
 
             for (Transaction transaction:list) {
+                runningBalance += transaction.getAmount();
                 output.append(
                     transaction.getDate() + " || " +
                         transaction.getAmount() + " || " +
-                        transaction.getBalance() + " || "
+                        runningBalance + " || "
             );
         }
 
-        StatementPrinter.print(output);
+        statementPrinter.print(output.toString());
     }
 }
