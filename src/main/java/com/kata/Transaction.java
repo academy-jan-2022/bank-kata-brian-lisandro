@@ -1,11 +1,13 @@
 package com.kata;
 
 public class Transaction {
-    public Transaction(int i) {
-        throw new UnsupportedOperationException();
+    private final int amount;
+
+    public Transaction(int amount) {
+        this.amount = amount;
     }
 
     public int getAmount() {
-        throw new UnsupportedOperationException();
+        return this.amount;
     }
 }
