@@ -19,7 +19,7 @@ public class TransactionsRepositoryShould {
 
         transactions.addDeposit(1000);
         var result = transactions.getStatementsList();
-        var expected = new Transaction(1000, timeProvider.now(), 1000);
+        var expected = new Transaction(new Money(1000), timeProvider.now(), new Money(1000));
 
         assertEquals(expected.stringify(), result.get(0));
     }
@@ -31,7 +31,7 @@ public class TransactionsRepositoryShould {
 
         transactions.addWithdrawal(100);
         var result = transactions.getStatementsList();
-        var expected = new Transaction(-100, timeProvider.now(), -100);
+        var expected = new Transaction(new Money(-100), timeProvider.now(), new Money(-100));
 
         assertEquals(expected.stringify(), result.get(0));
     }

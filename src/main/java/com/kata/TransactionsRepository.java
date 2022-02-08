@@ -7,20 +7,20 @@ import java.util.stream.Collectors;
 public class TransactionsRepository {
     private TimeProvider timeProvider;
     private ArrayList<Transaction> transactions = new ArrayList<>();
-    private int balance = 0;
+    private Money balance = new Money(0);
 
     public TransactionsRepository(TimeProvider timeProvider) {
         this.timeProvider = timeProvider;
     }
 
     public void addDeposit(int amount) {
-        balance += amount;
-        transactions.add(new Transaction(amount, timeProvider.now(), balance));
+        balance = new Money(balance.value() + amount);
+        transactions.add(new Transaction(new Money(amount), timeProvider.now(), balance));
     }
 
     public void addWithdrawal(int amount) {
-        balance -= amount;
-        transactions.add(new Transaction(-amount, timeProvider.now(), balance));
+        balance = new Money(balance.value() - amount);
+        transactions.add(new Transaction(new Money(-amount), timeProvider.now(), balance));
     }
 
     public List<String> getStatementsList() {

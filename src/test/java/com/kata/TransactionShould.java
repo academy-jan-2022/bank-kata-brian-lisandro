@@ -13,7 +13,7 @@ public class TransactionShould {
         var timeProvider = mock(TimeProvider.class);
         when(timeProvider.now()).thenReturn("10/10/2019");
 
-        var transaction  = new Transaction(100, timeProvider.now(), 100);
+        var transaction  = new Transaction(new Money(100), timeProvider.now(), new Money(100));
 
         var result = transaction.stringify();
 
