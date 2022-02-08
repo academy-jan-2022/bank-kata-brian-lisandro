@@ -5,22 +5,22 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class TransactionsRepository {
-    private TimeProvider timeProvider;
-    private ArrayList<Transaction> transactions = new ArrayList<>();
+    private final TimeProvider timeProvider;
+    private final ArrayList<Transaction> transactions = new ArrayList<>();
     private Money balance = new Money(0);
 
     public TransactionsRepository(TimeProvider timeProvider) {
         this.timeProvider = timeProvider;
     }
 
-    public void addDeposit(int amount) {
+    public void addDeposit(Money amount) {
         balance = balance.add(amount);
-        transactions.add(new Transaction(new Money(amount), timeProvider.now(), balance));
+        transactions.add(new Transaction(amount, timeProvider.now(), balance));
     }
 
-    public void addWithdrawal(int amount) {
-        balance = balance.add(-amount);
-        transactions.add(new Transaction(new Money(-amount), timeProvider.now(), balance));
+    public void addWithdrawal(Money amount) {
+        balance = balance.add(amount);
+        transactions.add(new Transaction(amount, timeProvider.now(), balance));
     }
 
     public List<String> getStatementsList() {

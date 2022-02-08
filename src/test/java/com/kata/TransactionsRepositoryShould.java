@@ -17,7 +17,7 @@ public class TransactionsRepositoryShould {
         var transactions = new TransactionsRepository(timeProvider);
         when(timeProvider.now()).thenReturn("10/01/2020");
 
-        transactions.addDeposit(1000);
+        transactions.addDeposit(new Money(1000));
         var result = transactions.getStatementsList();
         var expected = new Transaction(new Money(1000), timeProvider.now(), new Money(1000));
 
@@ -29,7 +29,7 @@ public class TransactionsRepositoryShould {
         var transactions = new TransactionsRepository(timeProvider);
         when(timeProvider.now()).thenReturn("10/01/2020");
 
-        transactions.addWithdrawal(100);
+        transactions.addWithdrawal(new Money(-100));
         var result = transactions.getStatementsList();
         var expected = new Transaction(new Money(-100), timeProvider.now(), new Money(-100));
 

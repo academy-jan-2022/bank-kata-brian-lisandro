@@ -20,13 +20,13 @@ public class AccountShould {
     @Test void
     take_a_deposit_request() {
         account.deposit(1000);
-        verify(mockTransactionsRepository).addDeposit(1000);
+        verify(mockTransactionsRepository).addDeposit(new Money(1000));
     }
 
     @Test void
     take_a_withdrawl_request() {
         account.withdraw(500);
-        verify(mockTransactionsRepository).addWithdrawal(500);
+        verify(mockTransactionsRepository).addWithdrawal(new Money(-500));
     }
 
     @Test void
