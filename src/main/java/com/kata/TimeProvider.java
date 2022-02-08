@@ -5,8 +5,8 @@ import java.time.format.DateTimeFormatter;
 
 public class TimeProvider {
     public String now(){
-        var formattedDate = DateTimeFormatter.ofPattern("dd/mm/yyyy").format(LocalDateTime.now());
-
-        return formattedDate;
+        return DateTimeFormatter
+            .ofPattern("dd/mm/yyyy")
+            .format(LocalDateTime.now());
     }
 }
