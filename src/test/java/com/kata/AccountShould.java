@@ -24,7 +24,7 @@ public class AccountShould {
     }
 
     @Test void
-    take_a_withdrawl_request() {
+    take_a_withdrawal_request() {
         account.withdraw(500);
         verify(mockTransactionsRepository).addTransaction(new Money(-500));
     }
