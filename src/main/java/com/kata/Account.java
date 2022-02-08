@@ -1,11 +1,10 @@
 package com.kata;
 
 import java.util.Collections;
-import java.util.List;
 
 public class Account {
     private final TransactionsRepository transactionsRepository;
-    private StatementPrinter statementPrinter;
+    private final StatementPrinter statementPrinter;
 
     public Account(TransactionsRepository transactionsRepository, StatementPrinter statementPrinter) {
         this.transactionsRepository = transactionsRepository;
@@ -13,25 +12,18 @@ public class Account {
     }
 
     public void deposit(int amount) {
-        transactionsRepository.addDeposit(new Money(amount));
+        transactionsRepository.addTransaction(new Money(amount));
     }
 
     public void withdraw(int amount) {
-        transactionsRepository.addWithdrawal(new Money(-amount));
+        transactionsRepository.addTransaction(new Money(-amount));
     }
 
     public void printStatement() {
-        var statement = generateStatement();
+        var statement = transactionsRepository.getStatementsList();
+        statement.add("Date || Amount || Balance");
+        Collections.reverse(statement);
 
         statementPrinter.print(String.join("\n", statement));
-    }
-
-    private List<String> generateStatement() {
-        var statementsList = transactionsRepository.getStatementsList();
-
-        statementsList.add("Date || Amount || Balance");
-        Collections.reverse(statementsList);
-
-        return statementsList;
     }
 }
