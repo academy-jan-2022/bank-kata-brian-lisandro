@@ -1,26 +1,26 @@
 package com.kata;
 
 public class Account {
-    private final Transactions transactions;
+    private final TransactionsRepository transactionsRepository;
     private StatementPrinter statementPrinter;
 
-    public Account(Transactions transactions, StatementPrinter statementPrinter) {
-        this.transactions = transactions;
+    public Account(TransactionsRepository transactionsRepository, StatementPrinter statementPrinter) {
+        this.transactionsRepository = transactionsRepository;
         this.statementPrinter = statementPrinter;
     }
 
     public void deposit(int amount) {
-        transactions.addDeposit(amount);
+        transactionsRepository.addDeposit(amount);
     }
 
     public void withdraw(int amount) {
-        transactions.addWithdrawal(amount);
+        transactionsRepository.addWithdrawal(amount);
     }
 
     public void printStatement() {
         var output = new StringBuilder();
         output.append("Date       || Amount || Balance\n");
-            var list = transactions.getAll();
+            var list = transactionsRepository.getAll();
             var runningBalance = 0;
 
         for (int i = 0; i < list.size(); i++) {

@@ -1,19 +1,25 @@
 package com.kata;
 
 import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@RunWith(MockitoJUnitRunner.class)
 public class AcceptanceTest {
+    @Mock TimeProvider timeProvider;
+
     @Test void
     acceptance_test(){
         var output =  new ByteArrayOutputStream();
         System.setOut(new PrintStream(output));
 
-        var transactions = new Transactions();
+        var transactions = new TransactionsRepository(timeProvider);
         var statementPrinter = new StatementPrinter();
         var account = new Account(transactions, statementPrinter);
 

@@ -7,26 +7,26 @@ import static org.mockito.Mockito.*;
 import static org.mockito.Mockito.verify;
 
 public class AccountShould {
-    private Transactions mockTransactions;
+    private TransactionsRepository mockTransactionsRepository;
     private Account account;
     private StatementPrinter mockStatementPrinter;
 
     @BeforeEach void set_up() {
-        mockTransactions = mock(Transactions.class);
+        mockTransactionsRepository = mock(TransactionsRepository.class);
         mockStatementPrinter = mock(StatementPrinter.class);
-        account = new Account(mockTransactions, mockStatementPrinter);
+        account = new Account(mockTransactionsRepository, mockStatementPrinter);
     }
 
     @Test void
     take_a_deposit_request() {
         account.deposit(1000);
-        verify(mockTransactions).addDeposit(1000);
+        verify(mockTransactionsRepository).addDeposit(1000);
     }
 
     @Test void
     take_a_withdrawl_request() {
         account.withdraw(500);
-        verify(mockTransactions).addWithdrawal(500);
+        verify(mockTransactionsRepository).addWithdrawal(500);
     }
 
     @Test void
