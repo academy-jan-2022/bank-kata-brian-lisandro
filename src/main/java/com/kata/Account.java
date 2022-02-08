@@ -1,7 +1,6 @@
 package com.kata;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 
 public class Account {
@@ -28,9 +27,7 @@ public class Account {
 
         for (Transaction transaction : list) {
             runningBalance += transaction.amount();
-            output.add(transaction.date()+ " || " +
-                transaction.amount() + " || " +
-                runningBalance);
+            output.add(transaction.stringify() + runningBalance);
         }
 
         output.add("Date || Amount || Balance");
