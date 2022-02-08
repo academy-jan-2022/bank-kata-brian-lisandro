@@ -21,9 +21,17 @@ public class Account {
     }
 
     public void printStatement() {
+        var output = generateStatement();
+
+
+
+        statementPrinter.print(String.join("\n", output));
+    }
+
+    private ArrayList<String> generateStatement() {
         var output = new ArrayList<String>();
-            var list = transactionsRepository.getAll();
-            var runningBalance = 0;
+        var list = transactionsRepository.getAll();
+        var runningBalance = 0;
 
         for (Transaction transaction : list) {
             runningBalance += transaction.amount();
@@ -33,6 +41,6 @@ public class Account {
         output.add("Date || Amount || Balance");
         Collections.reverse(output);
 
-        statementPrinter.print(String.join("\n", output));
+        return output;
     }
 }
