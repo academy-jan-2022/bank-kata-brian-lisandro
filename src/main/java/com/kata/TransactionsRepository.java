@@ -2,7 +2,6 @@ package com.kata;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 public class TransactionsRepository {
@@ -10,7 +9,7 @@ public class TransactionsRepository {
     private ArrayList<Transaction> transactions = new ArrayList<>();
     private int balance = 0;
 
-    public TransactionsRepository(TimeProvider timeProvider){
+    public TransactionsRepository(TimeProvider timeProvider) {
         this.timeProvider = timeProvider;
     }
 
@@ -25,9 +24,6 @@ public class TransactionsRepository {
     }
 
     public List<String> getStatementsList() {
-        AtomicInteger runningBalance = new AtomicInteger();
-
-
         return this.transactions.stream()
             .map(transaction -> transaction.stringify())
             .collect(Collectors.toList());
