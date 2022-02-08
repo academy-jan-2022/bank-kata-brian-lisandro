@@ -1,5 +1,9 @@
 package com.kata;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+
 public class Account {
     private final TransactionsRepository transactionsRepository;
     private StatementPrinter statementPrinter;
@@ -18,25 +22,20 @@ public class Account {
     }
 
     public void printStatement() {
-        var output = new StringBuilder();
-        output.append("Date       || Amount || Balance\n");
+        var output = new ArrayList<String>();
             var list = transactionsRepository.getAll();
             var runningBalance = 0;
 
-        for (int i = 0; i < list.size(); i++) {
-            Transaction transaction = list.get(i);
+        for (Transaction transaction : list) {
             runningBalance += transaction.getAmount();
-            output.append(
-                transaction.getDate() + " || " +
-                    transaction.getAmount() + " || " +
-                    runningBalance
-            );
-
-            if (i < list.size()) {
-                output.append("\n");
-            }
+            output.add(transaction.getDate() + " || " +
+                transaction.getAmount() + " || " +
+                runningBalance);
         }
 
-        statementPrinter.print(output.toString());
+        output.add("Date || Amount || Balance");
+        Collections.reverse(output);
+
+        statementPrinter.print(String.join("\n", output));
     }
 }
