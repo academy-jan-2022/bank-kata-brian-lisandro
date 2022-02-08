@@ -21,26 +21,24 @@ public class Account {
     }
 
     public void printStatement() {
-        var output = generateStatement();
+        var statement = generateStatement();
 
-
-
-        statementPrinter.print(String.join("\n", output));
+        statementPrinter.print(String.join("\n", statement));
     }
 
     private ArrayList<String> generateStatement() {
-        var output = new ArrayList<String>();
+        var statement = new ArrayList<String>();
         var list = transactionsRepository.getAll();
         var runningBalance = 0;
 
         for (Transaction transaction : list) {
             runningBalance += transaction.amount();
-            output.add(transaction.stringify() + runningBalance);
+            statement.add(transaction.stringify() + runningBalance);
         }
 
-        output.add("Date || Amount || Balance");
-        Collections.reverse(output);
+        statement.add("Date || Amount || Balance");
+        Collections.reverse(statement);
 
-        return output;
+        return statement;
     }
 }
