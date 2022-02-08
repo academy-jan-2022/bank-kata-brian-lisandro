@@ -30,17 +30,11 @@ public class Account {
     }
 
     private List<String> generateStatement() {
-        var statementsList = transactionsRepository.getAll();
-        AtomicInteger runningBalance = new AtomicInteger();
+        var statementsList = transactionsRepository.getStatementsList();
 
-        var statement = statementsList.stream().map(transaction -> {
-            runningBalance.addAndGet(transaction.amount());
-            return transaction.stringify() + runningBalance;
-        }).collect(Collectors.toList());
+        statementsList.add("Date || Amount || Balance");
+        Collections.reverse(statementsList);
 
-        statement.add("Date || Amount || Balance");
-        Collections.reverse(statement);
-
-        return statement;
+        return statementsList;
     }
 }

@@ -2,12 +2,11 @@ package com.kata;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class TransactionsRepositoryShould {
@@ -16,22 +15,24 @@ public class TransactionsRepositoryShould {
     @Test void
     take_a_deposit_request() {
         var transactions = new TransactionsRepository(timeProvider);
+        when(timeProvider.now()).thenReturn("10/01/2020");
 
         transactions.addDeposit(1000);
-        var result = transactions.getAll();
-        var expected = new Transaction(1000, timeProvider.now());
+        var result = transactions.getStatementsList();
+        var expected = new Transaction(1000, timeProvider.now(), 1000);
 
-        assertEquals(expected.amount(), result.get(0).amount());
+        assertEquals(expected.stringify(), result.get(0));
     }
 
     @Test void
     take_a_withdrawal_request() {
         var transactions = new TransactionsRepository(timeProvider);
+        when(timeProvider.now()).thenReturn("10/01/2020");
 
         transactions.addWithdrawal(100);
-        var result = transactions.getAll();
-        var expected = new Transaction(-100, timeProvider.now());
+        var result = transactions.getStatementsList();
+        var expected = new Transaction(-100, timeProvider.now(), -100);
 
-        assertEquals(expected.amount(), result.get(0).amount());
+        assertEquals(expected.stringify(), result.get(0));
     }
 }
