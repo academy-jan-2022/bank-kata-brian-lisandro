@@ -2,6 +2,9 @@ package com.kata;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 public class Account {
     private final TransactionsRepository transactionsRepository;
@@ -26,15 +29,14 @@ public class Account {
         statementPrinter.print(String.join("\n", statement));
     }
 
-    private ArrayList<String> generateStatement() {
-        var statement = new ArrayList<String>();
-        var list = transactionsRepository.getAll();
-        var runningBalance = 0;
+    private List<String> generateStatement() {
+        var statementsList = transactionsRepository.getAll();
+        AtomicInteger runningBalance = new AtomicInteger();
 
-        for (Transaction transaction : list) {
-            runningBalance += transaction.amount();
-            statement.add(transaction.stringify() + runningBalance);
-        }
+        var statement = statementsList.stream().map(transaction -> {
+            runningBalance.addAndGet(transaction.amount());
+            return transaction.stringify() + runningBalance;
+        }).collect(Collectors.toList());
 
         statement.add("Date || Amount || Balance");
         Collections.reverse(statement);
