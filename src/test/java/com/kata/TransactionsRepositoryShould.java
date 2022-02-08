@@ -21,7 +21,7 @@ public class TransactionsRepositoryShould {
         var result = transactions.getAll();
         var expected = new Transaction(1000, timeProvider.now());
 
-        assertEquals(expected.getAmount(), result.get(0).getAmount());
+        assertEquals(expected.amount(), result.get(0).amount());
     }
 
     @Test void
@@ -32,6 +32,6 @@ public class TransactionsRepositoryShould {
         var result = transactions.getAll();
         var expected = new Transaction(-100, timeProvider.now());
 
-        assertEquals(expected.getAmount(), result.get(0).getAmount());
+        assertEquals(expected.amount(), result.get(0).amount());
     }
 }

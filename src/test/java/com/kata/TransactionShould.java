@@ -12,7 +12,7 @@ public class TransactionShould {
         var timeProviderMock = mock(TimeProvider.class);
         var transaction = new Transaction(100, timeProviderMock.now());
 
-        var result = transaction.getAmount();
+        var result = transaction.amount();
 
         assertEquals(100,  result);
     }
@@ -24,7 +24,7 @@ public class TransactionShould {
         when(timeProviderMock.now()).thenReturn(expectedDate);
         var transaction = new Transaction(100, timeProviderMock.now());
 
-        var result = transaction.getDate();
+        var result = transaction.date();
 
         assertEquals(expectedDate,  result);
     }

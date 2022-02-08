@@ -27,9 +27,9 @@ public class Account {
             var runningBalance = 0;
 
         for (Transaction transaction : list) {
-            runningBalance += transaction.getAmount();
-            output.add(transaction.getDate() + " || " +
-                transaction.getAmount() + " || " +
+            runningBalance += transaction.amount();
+            output.add(transaction.date()+ " || " +
+                transaction.amount() + " || " +
                 runningBalance);
         }
 

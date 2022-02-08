@@ -34,7 +34,7 @@ public class AcceptanceTest {
         account.withdraw(500);
         account.printStatement();
 
-        var finalOutput = output.toString().replace("\r\n", "");
+        var finalOutput = output.toString().trim();
         var expected = "Date || Amount || Balance\n" +
             "14/01/2012 || -500 || 2500\n" +
             "13/01/2012 || 2000 || 3000\n" +
