@@ -14,18 +14,18 @@ public class TransactionsRepository {
     }
 
     public void addDeposit(int amount) {
-        balance = new Money(balance.value() + amount);
+        balance = balance.add(amount);
         transactions.add(new Transaction(new Money(amount), timeProvider.now(), balance));
     }
 
     public void addWithdrawal(int amount) {
-        balance = new Money(balance.value() - amount);
+        balance = balance.add(-amount);
         transactions.add(new Transaction(new Money(-amount), timeProvider.now(), balance));
     }
 
     public List<String> getStatementsList() {
         return this.transactions.stream()
-            .map(transaction -> transaction.stringify())
+            .map(Transaction::stringify)
             .collect(Collectors.toList());
     }
 }
